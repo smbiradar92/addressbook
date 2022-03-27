@@ -13,6 +13,5 @@ public class AddressBookMain {
 			con.deleteContact();			
 		}
 		
-
 	}
 

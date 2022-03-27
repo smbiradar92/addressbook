@@ -3,6 +3,7 @@ package com.addressbook;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Scanner;
 
 public class Contact {
@@ -20,12 +21,12 @@ public class Contact {
 	AddressBook contact = new AddressBook(firstName,
 			lastName, address, city, state, phoneNumber,
 			zip, email);
-
 	Scanner sc = new Scanner(System.in);
 
 	public void createContact() {
+
 		System.out.println(
-				"Please enter the personal details below:\n");
+				"Please enter the personla details below:\n");
 
 		System.out.println("Enter the First name : ");
 		String firstName = sc.nextLine();
@@ -54,6 +55,7 @@ public class Contact {
 		list.add(new AddressBook(firstName, lastName,
 				address, city, state, phoneNumber, zip,
 				email));
+		printContact();
 		System.out
 				.println("Contact created successfully\n");
 	}
@@ -68,7 +70,7 @@ public class Contact {
 						"Please enter the details below:\n");
 
 				System.out
-						.println("Enter the first name : ");
+						.println("Enter the First name : ");
 				String firstName = sc.nextLine();
 
 				System.out
@@ -108,7 +110,7 @@ public class Contact {
 		}
 	}
 
-	public AddressBook printContact() {
+	public List<AddressBook> printContact() {
 		System.out.println(
 				"-----------------------Print Contact--------------------------------------------\n");
 
@@ -119,7 +121,7 @@ public class Contact {
 				System.out.println(contact);
 			}
 		}
-		return contact;
+		return list;
 	}
 
 	public void editContact() {
@@ -130,57 +132,59 @@ public class Contact {
 		System.out.println(
 				"Enter the firstName of the contact to edit");
 		Scanner sc = new Scanner(System.in);
-		String firstName = sc.next();
-		Iterator<AddressBook> iter = list.iterator();
-		AddressBook contact = iter.next();
+		boolean check = false;
+		String newName = sc.next();
+		ListIterator<AddressBook> iter = list
+				.listIterator();
 		try {
 			while (iter.hasNext())
-				if (firstName
-						.equals(contact.getFirstName())) {
-					System.out.println(
-							"Enter New firstName : ");
-					String newName = sc.next();
-					contact.setFirstName(newName);
+				contact = iter.next();
+			if (newName.equalsIgnoreCase(
+					contact.getFirstName())) {
+				System.out
+						.println("Enter New firstName : ");
+				String firstName = sc.next();
+				contact.setFirstName(firstName);
 
-					System.out.println(
-							"Enter New lastName : ");
-					String lastName = sc.next();
-					contact.setLastName(lastName);
+				System.out.println("Enter New lastName : ");
+				String lastName = sc.next();
+				contact.setLastName(lastName);
 
-					System.out.println("Enter address : ");
-					String address = sc.next();
-					contact.setAddress(address);
+				System.out.println("Enter address : ");
+				String address = sc.next();
+				contact.setAddress(address);
 
-					System.out.println("Enter city : ");
-					String city = sc.next();
-					contact.setCity(city);
+				System.out.println("Enter city : ");
+				String city = sc.next();
+				contact.setCity(city);
 
-					System.out.println("Enter state : ");
-					String state = sc.next();
-					contact.setState(state);
+				System.out.println("Enter state : ");
+				String state = sc.next();
+				contact.setState(state);
 
-					System.out.println("Enter email id : ");
-					String email = sc.next();
-					contact.setEmail(email);
+				System.out.println("Enter email id : ");
+				String email = sc.next();
+				contact.setEmail(email);
 
-					System.out.println("Enter zip code : ");
-					long zip = sc.nextLong();
-					contact.setZip(zip);
+				System.out.println("Enter zip code : ");
+				long zip = sc.nextLong();
+				contact.setZip(zip);
 
-					System.out.println(
-							"Enter phoneNumber : ");
-					long phoneNumber = sc.nextLong();
-					contact.setPhoneNumber(phoneNumber);
-					list.add(new AddressBook(firstName,
-							lastName, address, city, state,
-							zip, phoneNumber, email));
-					System.out.println(
-							"contact edited successfully\n");
-				} else {
-					System.out.println(
-							"contact not found!!!!\n");
-				}
-			sc.close();
+				System.out.println("Enter phoneNumber : ");
+				long phoneNumber = sc.nextLong();
+				contact.setPhoneNumber(phoneNumber);
+				iter.set(new AddressBook(firstName,
+						lastName, address, city, state, zip,
+						phoneNumber, email));
+				check = true;
+				System.out.println(
+						"contacts edited successfully\n");
+			} else {
+				System.out
+						.println("contact not found!!!!\n");
+			}
+
+//			sc.close();
 			printContact();
 
 		} catch (Exception e) {
@@ -195,19 +199,24 @@ public class Contact {
 
 		System.out.println(
 				"Enter the firstName to delete the contact");
-		String firstName = sc.nextLine();
+		Scanner sc = new Scanner(System.in);
+		boolean check =false;
+		String existingFname = sc.nextLine();
 		Iterator<AddressBook> iter = list.iterator();
-		AddressBook contact = iter.next();
+		contact = iter.next();
 		while (iter.hasNext()) {
-			if (firstName.equals(contact.getFirstName())) {
-				list.remove(contact);
-
+			if (existingFname
+					.equalsIgnoreCase(contact.getFirstName())) {
+				iter.remove();
+				check = true;
 				System.out.println(
 						"contact " + contact.getFirstName()
-								+ " delete successfully");
+								+ " deleted successfully");
+
+			}else {
+				System.out.println("No record found for" +existingFname);
 			}
-		}
-		sc.close();
+		}		sc.close();
 
 	}
 
