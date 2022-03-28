@@ -23,72 +23,39 @@ public class Contact {
 			zip, email);
 	Scanner sc = new Scanner(System.in);
 
-	public void createContact() {
-
-		System.out.println(
-				"Please enter the personla details below:");
-
-		System.out.println("Enter the First name : ");
-		String firstName = sc.nextLine();
-
-		System.out.println("Enter the last name :");
-		String lastName = sc.nextLine();
-
-		System.out.println("Enter your Address : ");
-		String address = sc.nextLine();
-
-		System.out.println("Enter your city : ");
-		String city = sc.nextLine();
-
-		System.out.println("Enter your State : ");
-		String state = sc.nextLine();
-
-		System.out.println("Enter your e-Mail ID : ");
-		String email = sc.nextLine();
-
-		System.out.println("Enter your Zip code : ");
-		long zip = sc.nextLong();
-
-		System.out.println("Enter your contact number : ");
-		long phoneNumber = sc.nextLong();
-
-		list.add(new AddressBook(firstName, lastName,
-				address, city, state, phoneNumber, zip,
-				email));
-		printContact();
-		System.out
-				.println("Contact created successfully\n");
-	}
-
 	public void addnewContact() {
 		System.out.println(
-				"---------------------2. Add New contact ------------------------\n");
+				"---------------------1. Add New contact ------------------------\n");
 		Iterator<AddressBook> iter = list.iterator();
-		try {
-			while (iter.hasNext()) {
+
+		System.out.println(
+				"Plese enter the number of contacts to add");
+		int N = sc.nextInt();
+		for (int i = 0; i < N; i++) {
+			if (i <= N) {
 				System.out.println(
 						"Please enter the details below:\n");
 
 				System.out
 						.println("Enter the First name : ");
-				String firstName = sc.nextLine();
+				String firstName = sc.next();
 
 				System.out
 						.println("Enter the last name : ");
-				String lastName = sc.nextLine();
+				String lastName = sc.next();
 
 				System.out.println("Enter your Address : ");
-				String address = sc.nextLine();
+				String address = sc.next();
 
 				System.out.println("Enter your city : ");
-				String city = sc.nextLine();
+				String city = sc.next();
 
 				System.out.println("Enter your State : ");
-				String state = sc.nextLine();
+				String state = sc.next();
 
 				System.out
 						.println("Enter your e-Mail ID : ");
-				String email = sc.nextLine();
+				String email = sc.next();
 
 				System.out
 						.println("Enter your Zip code : ");
@@ -105,8 +72,8 @@ public class Contact {
 				System.out.println(
 						"Contact created successfully\n");
 			}
-		} catch (Exception e) {
-			// TODO: handle exception
+			printContact();
+
 		}
 	}
 
@@ -127,18 +94,18 @@ public class Contact {
 	public void editContact() {
 
 		System.out.println(
-				"-----------------------3.Edit Contact--------------------------------------------\n");
+				"-----------------------2.Edit Contact--------------------------------------------\n");
 
 		System.out.println(
-				"Enter the firstName of the contact to edit");
+				"Please enter the details as follow : ");
 		Scanner sc = new Scanner(System.in);
+		int option = sc.nextInt();
 		boolean check = false;
 		String newName = sc.next();
 		ListIterator<AddressBook> iter = list
 				.listIterator();
 		try {
-			while (iter.hasNext())
-				contact = iter.next();
+			contact = iter.next();
 			if (newName.equalsIgnoreCase(
 					contact.getFirstName())) {
 				System.out
@@ -200,24 +167,23 @@ public class Contact {
 		System.out.println(
 				"Enter the firstName to delete the contact");
 		Scanner sc = new Scanner(System.in);
-		boolean check =false;
+		boolean check = false;
 		String existingFname = sc.nextLine();
 		Iterator<AddressBook> iter = list.iterator();
 		contact = iter.next();
-			if (existingFname
-					.equalsIgnoreCase(contact.getFirstName())) {
-				iter.remove();
-				check = true;
-				System.out.println(
-						"contact " + contact.getFirstName()
-								+ " deleted successfully");
+		if (existingFname
+				.equalsIgnoreCase(contact.getFirstName())) {
+			iter.remove();
+			check = true;
+			System.out.println(
+					"contact " + contact.getFirstName()
+							+ " deleted successfully");
 
-			}else {
-				System.out.println("No record found for :" +existingFname);
-			}
-		}		
-//		sc.close();
-
+		} else {
+			System.out.println("No record found for :"
+					+ existingFname);
+		}
+		printContact();
 	}
-
-
+//		sc.close();
+}

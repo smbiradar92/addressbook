@@ -2,7 +2,7 @@ package com.addressbook;
 
 public class AddressBook {
 
-	static String firstName;
+	String firstName;
 	String lastName;
 	String address;
 	String city;
@@ -25,13 +25,16 @@ public class AddressBook {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public  String getFirstName() {
+	
+	public String getFirstName() {
 		return firstName;
 	}
+
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+
 
 	public String getLastName() {
 		return lastName;
@@ -89,6 +92,7 @@ public class AddressBook {
 		this.phoneNumber = phoneNumber;
 	}
 
+
 	@Override
 	public String toString() {
 		return "AddressBook [firstName=" + firstName
@@ -99,5 +103,5 @@ public class AddressBook {
 				+ "]";
 	}
 
+	
 }
-
