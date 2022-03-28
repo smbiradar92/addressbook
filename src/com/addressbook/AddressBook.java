@@ -10,6 +10,8 @@ public class AddressBook {
 	String email;
 	long zip;
 	long phoneNumber;
+	int n;
+	
 
 	public AddressBook(String firstName, String lastName,
 			String address, String city, String state,

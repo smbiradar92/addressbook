@@ -18,6 +18,7 @@ public class Contact {
 	long phoneNumber;
 
 	List<AddressBook> list = new ArrayList<AddressBook>();
+
 	AddressBook contact = new AddressBook(firstName,
 			lastName, address, city, state, phoneNumber,
 			zip, email);
