@@ -26,7 +26,7 @@ public class Contact {
 	public void createContact() {
 
 		System.out.println(
-				"Please enter the personla details below:\n");
+				"Please enter the personla details below:");
 
 		System.out.println("Enter the First name : ");
 		String firstName = sc.nextLine();
@@ -204,7 +204,6 @@ public class Contact {
 		String existingFname = sc.nextLine();
 		Iterator<AddressBook> iter = list.iterator();
 		contact = iter.next();
-		while (iter.hasNext()) {
 			if (existingFname
 					.equalsIgnoreCase(contact.getFirstName())) {
 				iter.remove();
@@ -214,10 +213,11 @@ public class Contact {
 								+ " deleted successfully");
 
 			}else {
-				System.out.println("No record found for" +existingFname);
+				System.out.println("No record found for :" +existingFname);
 			}
-		}		sc.close();
+		}		
+//		sc.close();
 
 	}
 
-}
+

@@ -2,7 +2,7 @@ package com.addressbook;
 
 public class AddressBook {
 
-	String firstName;
+	static String firstName;
 	String lastName;
 	String address;
 	String city;
@@ -25,7 +25,7 @@ public class AddressBook {
 		this.phoneNumber = phoneNumber;
 	}
 
-	public String getFirstName() {
+	public  String getFirstName() {
 		return firstName;
 	}
 
