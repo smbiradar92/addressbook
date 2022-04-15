@@ -17,7 +17,11 @@ public class Contact {
 	long zip;
 	long phoneNumber;
 
-	List<AddressBook> list = new ArrayList<AddressBook>();
+	List<AddressBook> list;
+
+	public Contact() {
+		list = new ArrayList<>();
+	}
 
 	AddressBook contact = new AddressBook(firstName,
 			lastName, address, city, state, phoneNumber,
@@ -27,6 +31,7 @@ public class Contact {
 	public void addnewContact() {
 		System.out.println(
 				"---------------------1. Add New contact ------------------------\n");
+		@SuppressWarnings("unused")
 		Iterator<AddressBook> iter = list.iterator();
 
 		System.out.println(
@@ -81,7 +86,6 @@ public class Contact {
 	public List<AddressBook> printContact() {
 		System.out.println(
 				"-----------------------Print Contact--------------------------------------------\n");
-
 		if (list.isEmpty()) {
 			System.out.println("No Records FOUND!!!");
 		} else {
@@ -105,60 +109,52 @@ public class Contact {
 		String newName = sc.next();
 		ListIterator<AddressBook> iter = list
 				.listIterator();
-		try {
-			contact = iter.next();
-			if (newName.equalsIgnoreCase(
-					contact.getFirstName())) {
-				System.out
-						.println("Enter New firstName : ");
-				String firstName = sc.next();
-				contact.setFirstName(firstName);
+		contact = iter.next();
+		if (newName
+				.equalsIgnoreCase(contact.getFirstName())) {
+			System.out.println("Enter New firstName : ");
+			String firstName = sc.next();
+			contact.setFirstName(firstName);
 
-				System.out.println("Enter New lastName : ");
-				String lastName = sc.next();
-				contact.setLastName(lastName);
+			System.out.println("Enter New lastName : ");
+			String lastName = sc.next();
+			contact.setLastName(lastName);
 
-				System.out.println("Enter address : ");
-				String address = sc.next();
-				contact.setAddress(address);
+			System.out.println("Enter address : ");
+			String address = sc.next();
+			contact.setAddress(address);
 
-				System.out.println("Enter city : ");
-				String city = sc.next();
-				contact.setCity(city);
+			System.out.println("Enter city : ");
+			String city = sc.next();
+			contact.setCity(city);
 
-				System.out.println("Enter state : ");
-				String state = sc.next();
-				contact.setState(state);
+			System.out.println("Enter state : ");
+			String state = sc.next();
+			contact.setState(state);
 
-				System.out.println("Enter email id : ");
-				String email = sc.next();
-				contact.setEmail(email);
+			System.out.println("Enter email id : ");
+			String email = sc.next();
+			contact.setEmail(email);
 
-				System.out.println("Enter zip code : ");
-				long zip = sc.nextLong();
-				contact.setZip(zip);
+			System.out.println("Enter zip code : ");
+			long zip = sc.nextLong();
+			contact.setZip(zip);
 
-				System.out.println("Enter phoneNumber : ");
-				long phoneNumber = sc.nextLong();
-				contact.setPhoneNumber(phoneNumber);
-				iter.set(new AddressBook(firstName,
-						lastName, address, city, state, zip,
-						phoneNumber, email));
-				check = true;
-				System.out.println(
-						"contacts edited successfully\n");
-			} else {
-				System.out
-						.println("contact not found!!!!\n");
-			}
+			System.out.println("Enter phoneNumber : ");
+			long phoneNumber = sc.nextLong();
+			contact.setPhoneNumber(phoneNumber);
+			iter.set(new AddressBook(firstName, lastName,
+					address, city, state, zip, phoneNumber,
+					email));
+			check = true;
+			System.out.println(
+					"contacts edited successfully\n");
+		} else {
+			System.out.println("contact not found!!!!\n");
+		}
 
 //			sc.close();
-			printContact();
-
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		printContact();
 	}
 
 	public void deleteContact() {
@@ -179,12 +175,11 @@ public class Contact {
 			System.out.println(
 					"contact " + contact.getFirstName()
 							+ " deleted successfully");
-
+			printContact();
 		} else {
 			System.out.println("No record found for :"
 					+ existingFname);
 		}
-		printContact();
 	}
 //		sc.close();
 }

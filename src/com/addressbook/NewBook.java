@@ -1,7 +1,6 @@
 package com.addressbook;
 
 import java.util.ArrayList;
-import java.util.Dictionary;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
@@ -9,7 +8,7 @@ import java.util.Scanner;
 public class NewBook extends AddressBookMain {
 
 	List<NewBook> newbook = new ArrayList<NewBook>();
-	String addbook;
+	static String addbook;
 
 	public void newAddressBook() {
 
@@ -35,7 +34,7 @@ public class NewBook extends AddressBookMain {
 		if (newbook.isEmpty()) {
 			System.out.println("No Records FOUND!!!");
 		} else {
-			for (NewBook contact : newbook) {
+			for (NewBook newBook : newbook) {
 				System.out.println(newbook);
 			}
 		}

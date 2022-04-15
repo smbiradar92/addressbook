@@ -11,7 +11,8 @@ public class AddressBook {
 	long zip;
 	long phoneNumber;
 	int n;
-	
+	String addbook;
+	String newbook;
 
 	public AddressBook(String firstName, String lastName,
 			String address, String city, String state,
@@ -27,16 +28,43 @@ public class AddressBook {
 		this.phoneNumber = phoneNumber;
 	}
 
-	
+	public void NewBook(String addbook, String newbook) {
+
+		this.addbook = addbook;
+		this.newbook = newbook;
+	}
+
+	public int getN() {
+		return n;
+	}
+
+	public void setN(int n) {
+		this.n = n;
+	}
+
+	public String getAddbook() {
+		return addbook;
+	}
+
+	public void setAddbook(String addbook) {
+		this.addbook = addbook;
+	}
+
+	public String getNewbook() {
+		return newbook;
+	}
+
+	public void setNewbook(String newbook) {
+		this.newbook = newbook;
+	}
+
 	public String getFirstName() {
 		return firstName;
 	}
 
-
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
-
 
 	public String getLastName() {
 		return lastName;
@@ -94,7 +122,6 @@ public class AddressBook {
 		this.phoneNumber = phoneNumber;
 	}
 
-
 	@Override
 	public String toString() {
 		return "AddressBook [firstName=" + firstName
@@ -102,8 +129,7 @@ public class AddressBook {
 				+ address + ", city=" + city + ", state="
 				+ state + ", email=" + email + ", zip="
 				+ zip + ", phoneNumber=" + phoneNumber
-				+ "]";
+				+ ", n=" + n + "]";
 	}
 
-	
 }
