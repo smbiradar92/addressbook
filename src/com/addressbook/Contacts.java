@@ -11,7 +11,7 @@ public class Contacts {
 	long zip;
 	long phoneNumber;
 	int n;
-	
+
 	public Contacts(String firstName, String lastName,
 			String address, String city, String state,
 			long zip, long phoneNumber, String email) {
@@ -107,5 +107,6 @@ public class Contacts {
 				+ zip + ", phoneNumber=" + phoneNumber
 				+ "]";
 	}
+	
 
 }

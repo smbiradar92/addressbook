@@ -12,6 +12,7 @@ public class AddressBook implements IAddressBook {
 	String city;
 	String state;
 	String email;
+	String name;
 	long zip;
 	long phoneNumber;
 
@@ -36,37 +37,50 @@ public class AddressBook implements IAddressBook {
 		int N = sc.nextInt();
 		int i = 0;
 		for (i = 0; i < N; i++) {
-			if (i <= N) {
+				if (i<=N) {
 				System.out.println(
 						"Please enter the details for contact"
 								+ i + 1 + "\n");
-				System.out
-						.println("Enter the First name : ");
+				System.out.print("Enter the First name : ");
 				contact.setFirstName(sc.next());
-				System.out
-						.println("Enter the Last name : ");
+					if (checkDuplicate(firstName)) {
+						System.out.println(
+								"Name already exists");
+					}else {
+						i = 1;
+					}
+				System.out.print("Enter the Last name : ");
 				contact.setLastName(sc.next());
 				System.out.println("Enter the city : ");
 				contact.setCity(sc.next());
-				System.out
-						.println("Enter the State name : ");
+				System.out.print("Enter the State name : ");
 				contact.setState(sc.next());
-				System.out.println("Enter the email id : ");
+				System.out.print("Enter the email id : ");
 				contact.setEmail(sc.next());
-			try {
-				System.out.println("Enter the PinCode : ");
-				contact.setZip(sc.nextLong());
-			} catch (Exception e) {
-				System.out.println("");
-			}
-
-				System.out.println(
-						"Enter the phoneNumber : ");
-				contact.setPhoneNumber(sc.nextLong());
+				System.out.print("Enter the PinCode : ");
+				try {
+					contact.setZip(sc.nextLong());
+				} catch (Exception e) {
+					System.out.print(
+							"Please only enter Numerical digits");
+					System.out.print(
+							"Please enter the PinCode again : ");
+					contact.setZip(sc.nextLong());
+				}
+				System.out
+						.print("Enter the phoneNumber : ");
+				try {
+					contact.setPhoneNumber(sc.nextLong());
+				} catch (Exception e) {
+					System.out.print(
+							"Please only enter Numerical digits");
+					System.out.print(
+							"Please enter the Phonenumber again : ");
+					contact.setPhoneNumber(sc.nextLong());
+				}
 				contacts.add(contact);
 				System.out.println(
 						"Contact created successfully!!!!!\n");
-
 			}
 		}
 	}
@@ -82,32 +96,31 @@ public class AddressBook implements IAddressBook {
 		System.out.println(
 				" \n Please enter the FirstName to edit");
 		String name = s.nextLine();
+//		boolean isContactFound = contacts.stream().anyMatch(
+//				c -> c.getFirstName().equals(name));
 
-		boolean isContactFound = contacts.stream().anyMatch(
-				c -> c.getFirstName().equals(name));
-
-		if (isContactFound) {
+		if (isContactFound(name)) {
 			Contacts contact = contacts.stream().filter(
 					c -> c.getFirstName().equals(name))
 					.findFirst().get();
-			System.out.println("Enter the First name : ");
+			System.out.print("Enter the First name : ");
 			contact.setFirstName(s.next());
-			System.out.println("Enter the Last name : ");
+			System.out.print("Enter the Last name : ");
 			contact.setLastName(s.next());
-			System.out.println("Enter the city : ");
+			System.out.print("Enter the city : ");
 			contact.setCity(s.next());
-			System.out.println("Enter the State name : ");
+			System.out.print("Enter the State name : ");
 			contact.setState(s.next());
-			System.out.println("Enter the email id : ");
+			System.out.print("Enter the email id : ");
 			contact.setEmail(s.next());
-			System.out.println("Enter the PinCode : ");
+			System.out.print("Enter the PinCode : ");
 			contact.setZip(s.nextLong());
-			System.out.println("Enter the phoneNumber : ");
+			System.out.print("Enter the phoneNumber : ");
 			contact.setPhoneNumber(s.nextLong());
-			System.out.println(
+			System.out.print(
 					"Contacts edited successfully \n");
 		} else {
-			System.out.println("No Contact found");
+			System.out.print("No Contact found");
 		}
 		contacts.add(contact);
 	}
@@ -120,24 +133,24 @@ public class AddressBook implements IAddressBook {
 
 		Scanner sc = new Scanner(System.in);
 		System.out.println(
-				"\nEnter the firstName to delete the contact");
+				"\nEnter the firstName to delete the contact:");
 
-		String name = sc.nextLine();
-		boolean deleteContact = contacts.stream().anyMatch(
-				c -> c.getFirstName().equals(name));
+		name = sc.nextLine();
+//		boolean isContactFound = contacts.stream().anyMatch(
+//				c -> c.getFirstName().equals(name));
 
-		if (deleteContact) {
+		if (isContactFound(name)) {
 			Contacts contact = contacts.stream().filter(
 					c -> c.getFirstName().equals(name))
 					.findFirst().get();
 			System.out.println(
-					"Are you sure you want to delete contact\n Type y to confirm");
+					"Are you sure you want to delete contact??\n please type y to confirm");
 			String choice = sc.nextLine();
 			if (choice.equalsIgnoreCase("y")) {
 				contacts.remove(contact);
 				System.out.println(
 						"Contact Deleted Successfully");
-			}else {
+			} else {
 				System.out.println("Contact not deleted");
 			}
 		} else {
@@ -165,7 +178,20 @@ public class AddressBook implements IAddressBook {
 						+ "]\n");
 			});
 		}
+	}
+
+	public boolean isContactFound(String name) {
+		boolean isContactFound = contacts.stream().anyMatch(
+				c -> c.getFirstName().equals(name));
+		return true;
 
 	}
 
+	public boolean checkDuplicate(String firstName) {
+		int duplicate = contacts.stream()
+				.anyMatch(d -> d.getFirstName()
+						.equalsIgnoreCase(firstName)) ? 1
+								: 0;
+		return duplicate == 1;
+	}
 }
