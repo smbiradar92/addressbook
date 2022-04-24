@@ -208,6 +208,7 @@ public class AddressBook implements IAddressBook {
 		System.out.println(
 				"************Search contacts by state or city **********");
 		int flag = 0;
+		int countCountacts =0;
 		sc = new Scanner(System.in);
 		System.out.println(
 				"Please enter the State or city to find the contacts");
@@ -231,7 +232,9 @@ public class AddressBook implements IAddressBook {
 							.equals(search)) {
 				flag = 1;
 				contacts.add(cityOrState);
+				countCountacts++;
 				System.out.println(cityOrState);
+				System.out.println("The number of contacts by city or state is "+countCountacts);
 			} else {
 				System.out.println(
 						" No records found with this city or state");
@@ -244,7 +247,6 @@ public class AddressBook implements IAddressBook {
 	public void viewContactByCtyorState() {
 		System.out.println(
 				"************View contacts by state or city **********");
-
 		if (contacts.isEmpty()) {
 			System.out.println("No records found");
 		} else {
@@ -273,7 +275,7 @@ public class AddressBook implements IAddressBook {
 	@Override
 	public void searchContact() {
 		System.out.println(
-				"Please select from below options to get more search options \n1. Search contact by city or state\n2. view contact by city or state\n");
+				"Please select from below options to get more search options \n1. Search contact by city or state\n2. view contact by city or state\n3. Exit search");
 		int option = sc.nextInt();
 		switch (option) {
 		case 1:
@@ -281,6 +283,9 @@ public class AddressBook implements IAddressBook {
 			break;
 		case 2:
 			viewContactByCtyorState();
+			break;
+		case 3:
+			System.out.println("You have exited the contact search");			
 			break;
 		default:
 			System.out.println(
