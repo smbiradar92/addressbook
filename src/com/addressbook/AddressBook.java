@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
+import javax.swing.DefaultBoundedRangeModel;
+
 public class AddressBook implements IAddressBook {
 
 	String firstName;
@@ -38,54 +40,49 @@ public class AddressBook implements IAddressBook {
 				"Plese enter the number of contacts to add");
 		int N = sc.nextInt();
 		for (int i = 1; i <= N; i++) {
+			System.out.println(
+					"Please enter the details for the contact"
+							+ i + "\n");
+			System.out.print("Enter the First name : ");
+			firstName = sc.next();
+			if (checkDuplicate(firstName)) {
 				System.out.println(
-						"Please enter the details for the contact"
-								+ i + "\n");
-				System.out.print("Enter the First name : ");
-				firstName = sc.next();
-				if (checkDuplicate(firstName)) {
-					System.out.println(
-							"First Name already exists, please try with other name");
-				} else {
-					contact.setFirstName(firstName);
+						"First Name already exists, please try with other name");
+			} else {
+				contact.setFirstName(firstName);
+				System.out.print("Enter the Last name : ");
+				contact.setLastName(sc.next());
+				System.out.print("Enter the city : ");
+				contact.setCity(sc.next());
+				System.out.print("Enter the State : ");
+				contact.setState(sc.next());
+				System.out.print("Enter the email id : ");
+				contact.setEmail(sc.next());
+				System.out.print("Enter the PinCode : ");
+				try {
+					contact.setZip(sc.nextLong());
+				} catch (Exception e) {
 					System.out.print(
-							"Enter the Last name : ");
-					contact.setLastName(sc.next());
-					System.out.print("Enter the city : ");
-					contact.setCity(sc.next());
-					System.out.print("Enter the State : ");
-					contact.setState(sc.next());
-					System.out
-							.print("Enter the email id : ");
-					contact.setEmail(sc.next());
-					System.out
-							.print("Enter the PinCode : ");
-					try {
-						contact.setZip(sc.nextLong());
-					} catch (Exception e) {
-						System.out.print(
-								"Please only enter Numerical digits");
-						System.out.print(
-								"Please enter the PinCode again : ");
-						contact.setZip(sc.nextLong());
-					}
+							"Please only enter Numerical digits");
 					System.out.print(
-							"Enter the phoneNumber : ");
-					try {
-						contact.setPhoneNumber(
-								sc.nextLong());
-					} catch (Exception e) {
-						System.out.print(
-								"Please only enter Numerical digits");
-						System.out.print(
-								"Please enter the Phonenumber again : ");
-						contact.setPhoneNumber(
-								sc.nextLong());
-					}
-					contacts.add(contact);
-					System.out.println(
-							"Contact created successfully!!!!!\n");
+							"Please enter the PinCode again : ");
+					contact.setZip(sc.nextLong());
 				}
+				System.out
+						.print("Enter the phoneNumber : ");
+				try {
+					contact.setPhoneNumber(sc.nextLong());
+				} catch (Exception e) {
+					System.out.print(
+							"Please only enter Numerical digits");
+					System.out.print(
+							"Please enter the Phonenumber again : ");
+					contact.setPhoneNumber(sc.nextLong());
+				}
+				contacts.add(contact);
+				System.out.println(
+						"Contact created successfully!!!!!\n");
+			}
 //			}
 
 		}
@@ -144,7 +141,7 @@ public class AddressBook implements IAddressBook {
 		name = sc.nextLine();
 //		boolean isContactFound = contacts.stream().anyMatch(
 //				c -> c.getFirstName().equals(name));
-
+		try {
 		if (isContactFound(name)) {
 			Contacts contact = contacts.stream().filter(
 					c -> c.getFirstName().equals(name))
@@ -162,6 +159,12 @@ public class AddressBook implements IAddressBook {
 		} else {
 			System.out.println("Sorry...No contact found");
 		}
+		
+		} catch (NullPointerException e) {
+			System.out.println("Invalid data entere please retry");
+			AddressBookMain.showMainMenu(sc);
+		}
+	
 	}
 
 	@Override
@@ -175,7 +178,6 @@ public class AddressBook implements IAddressBook {
 			contacts.forEach(c -> {
 				System.out.print("firstName=" + c.firstName
 						+ ", lastName=" + c.lastName
-						+ ", address=" + c.address
 						+ ", city=" + c.city + ", state="
 						+ c.state + ", email=" + c.email
 						+ ", zip=" + c.zip
@@ -202,7 +204,9 @@ public class AddressBook implements IAddressBook {
 
 //	
 	@Override
-	public void searchContact() {
+	public void searchContactByCityorState() {
+		System.out.println(
+				"************Search contacts by state or city **********");
 		int flag = 0;
 		sc = new Scanner(System.in);
 		System.out.println(
@@ -215,8 +219,10 @@ public class AddressBook implements IAddressBook {
 						|| cityOrState.getState()
 								.equalsIgnoreCase(search));
 		if (searchCity) {
-			System.out.println("The contact " + search
-					+ " is found in the AddressBook");
+			System.out.println(
+					"Search successufull!!!!!\n The contact "
+							+ search
+							+ " is found in the AddressBook");
 		}
 		for (Contacts cityOrState : contacts) {
 			if (cityOrState.getState()
@@ -225,6 +231,7 @@ public class AddressBook implements IAddressBook {
 							.equals(search)) {
 				flag = 1;
 				contacts.add(cityOrState);
+				System.out.println(cityOrState);
 			} else {
 				System.out.println(
 						" No records found with this city or state");
@@ -232,10 +239,53 @@ public class AddressBook implements IAddressBook {
 		}
 
 	}
-//	public void searchByStateOrCity(String name,Map<String, Set<Contacts>> contacts) {
-//		sc = new Scanner(System.in);
-//		System.out.print("Please enter the State or city to find the contacts");
-//		name = sc.next();
-//		boolean search = contacts.
 
+	@Override
+	public void viewContactByCtyorState() {
+		System.out.println(
+				"************View contacts by state or city **********");
+
+		if (contacts.isEmpty()) {
+			System.out.println("No records found");
+		} else {
+			System.out.println(
+					"Please enter the city or state name ");
+			name = sc.nextLine();
+			boolean isPersonFound = contacts.stream()
+					.anyMatch(p -> p.getCity()
+							.equalsIgnoreCase(name))
+					|| contacts.stream()
+							.anyMatch(p -> p.getState()
+									.equalsIgnoreCase(
+											name));
+			for (Contacts cityOrState : contacts) {
+				if (isPersonFound) {
+					System.out.println("Showing contacts:");
+					System.out.println(cityOrState);
+				} else {
+					System.out.println(
+							"No person found in " + name);
+				}
+			}
+		}
+	}
+
+	@Override
+	public void searchContact() {
+		System.out.println(
+				"Please select from below options to get more search options \n1. Search contact by city or state\n2. view contact by city or state\n");
+		int option = sc.nextInt();
+		switch (option) {
+		case 1:
+			searchContactByCityorState();
+			break;
+		case 2:
+			viewContactByCtyorState();
+			break;
+		default:
+			System.out.println(
+					"You have entered an invalid key");
+		}
+
+	}
 }

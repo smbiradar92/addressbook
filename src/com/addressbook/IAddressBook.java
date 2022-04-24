@@ -12,6 +12,10 @@ public interface IAddressBook {
 
 	void deleteContact();
 
+	void viewContactByCtyorState();
+
+	void searchContactByCityorState();
+
 	void searchContact();
 	
 
