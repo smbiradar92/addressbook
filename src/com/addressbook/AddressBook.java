@@ -16,8 +16,8 @@ public class AddressBook implements IAddressBook {
 	String email;
 	String name;
 	int i;
-	long zip;
-	long phoneNumber;
+	Long zip;
+	Long phoneNumber;
 
 	Set<Contacts> contacts;
 	static Scanner sc;
@@ -209,6 +209,7 @@ public class AddressBook implements IAddressBook {
 	public void searchContactByCityorState() {
 		System.out.println(
 				"<==================Search contacts by state or city ==================>");
+		@SuppressWarnings("unused")
 		int flag = 0;
 		int countCountacts = 0;
 		sc = new Scanner(System.in);
@@ -268,7 +269,8 @@ public class AddressBook implements IAddressBook {
 					System.out.println(cityOrState);
 				} else {
 					System.out.println(
-							"No person found in the city " + name);
+							"No person found in the city "
+									+ name);
 				}
 			}
 		}
@@ -303,13 +305,33 @@ public class AddressBook implements IAddressBook {
 	@Override
 	public void sortingMethod() {
 		System.out.println(
-				"Please select from below options to get more search options \n1. Search contact by city or state\n2. view contact by city or state\n3. Exit search");
+				"Please select from below sortong options to continue \n1. Sort contacts by Name \t2. Sort contacts by city \t3. Sort contacts by state \t4. Sort contacts by Zip\\t5. Exit Sort");
 		int option = sc.nextInt();
 		switch (option) {
 		case 1:
 			System.out.println(
 					"<=============Sort By Name=============>");
 			sortByName(contacts);
+			break;
+		case 2:
+			System.out.println(
+					"<=============Sort By City=============>");
+			sortByCity(contacts);
+			break;
+		case 3:
+			System.out.println(
+					"<=============Sort By State=============>");
+			sortByState(contacts);
+			break;
+		case 4:
+			System.out.println(
+					"<=============Sort By zip=============>");
+			sortByZip(contacts);
+			break;
+
+		case 5:
+			System.out.println(
+					"You have successfully Exited from Sorting method");
 			break;
 		}
 
@@ -324,4 +346,35 @@ public class AddressBook implements IAddressBook {
 			System.out.println(sortList);
 		}
 	}
+
+	public static void sortByCity(Set<Contacts> contacts) {
+		List<Contacts> sortedList = contacts.stream()
+				.sorted((p1, p2) -> p1.city
+						.compareTo(p2.city))
+				.collect(Collectors.toList());
+		for (Contacts sortList : sortedList) {
+			System.out.println(sortList);
+		}
+	}
+
+	public static void sortByState(Set<Contacts> contacts) {
+		List<Contacts> sortedList = contacts.stream()
+				.sorted((p1, p2) -> p1.state
+						.compareTo(p2.state))
+				.collect(Collectors.toList());
+		for (Contacts sortList : sortedList) {
+			System.out.println(sortList);
+		}
+	}
+
+	public static void sortByZip(Set<Contacts> contacts) {
+		List<Contacts> sortedList = contacts.stream()
+				.sorted((o1, o2) -> o1.zip
+						.compareTo(o2.zip))
+				.collect(Collectors.toList());
+		for (Contacts sortList : sortedList)
+			System.out.println(sortList);
+
+	}
+
 }

@@ -8,13 +8,12 @@ public class Contacts {
 	String city;
 	String state;
 	String email;
-	long zip;
-	long phoneNumber;
-	int n;
+	Long zip;
+	Long phoneNumber;
 
 	public Contacts(String firstName, String lastName,
 			String address, String city, String state,
-			long zip, long phoneNumber, String email) {
+			Long zip,Long phoneNumber, String email) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -24,14 +23,6 @@ public class Contacts {
 		this.email = email;
 		this.zip = zip;
 		this.phoneNumber = phoneNumber;
-	}
-
-	public int getN() {
-		return n;
-	}
-
-	public void setN(int n) {
-		this.n = n;
 	}
 
 	public String getFirstName() {
@@ -86,7 +77,7 @@ public class Contacts {
 		return zip;
 	}
 
-	public void setZip(long zip) {
+	public void setZip(Long zip) {
 		this.zip = zip;
 	}
 
@@ -98,6 +89,7 @@ public class Contacts {
 		this.phoneNumber = phoneNumber;
 	}
 
+	
 	@Override
 	public String toString() {
 		return "AddressBook [firstName=" + firstName

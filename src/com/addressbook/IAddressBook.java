@@ -1,7 +1,7 @@
 package com.addressbook;
 
 public interface IAddressBook {
-	
+
 	void addContact();
 
 	void showContacts();
@@ -17,7 +17,5 @@ public interface IAddressBook {
 	void searchContact();
 
 	void sortingMethod();
-	
 
-	
 }
