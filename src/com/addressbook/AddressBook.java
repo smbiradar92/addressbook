@@ -1,11 +1,10 @@
 package com.addressbook;
 
 import java.util.HashSet;
-import java.util.Map;
+import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
-
-import javax.swing.DefaultBoundedRangeModel;
+import java.util.stream.Collectors;
 
 public class AddressBook implements IAddressBook {
 
@@ -142,29 +141,32 @@ public class AddressBook implements IAddressBook {
 //		boolean isContactFound = contacts.stream().anyMatch(
 //				c -> c.getFirstName().equals(name));
 		try {
-		if (isContactFound(name)) {
-			Contacts contact = contacts.stream().filter(
-					c -> c.getFirstName().equals(name))
-					.findFirst().get();
-			System.out.println(
-					"Are you sure you want to delete contact??\n please type y to confirm");
-			String choice = sc.nextLine();
-			if (choice.equalsIgnoreCase("y")) {
-				contacts.remove(contact);
+			if (isContactFound(name)) {
+				Contacts contact = contacts.stream().filter(
+						c -> c.getFirstName().equals(name))
+						.findFirst().get();
 				System.out.println(
-						"Contact Deleted Successfully");
+						"Are you sure you want to delete contact??\n please type y to confirm");
+				String choice = sc.nextLine();
+				if (choice.equalsIgnoreCase("y")) {
+					contacts.remove(contact);
+					System.out.println(
+							"Contact Deleted Successfully");
+				} else {
+					System.out
+							.println("Contact not deleted");
+				}
 			} else {
-				System.out.println("Contact not deleted");
+				System.out.println(
+						"Sorry...No contact found");
 			}
-		} else {
-			System.out.println("Sorry...No contact found");
-		}
-		
+
 		} catch (NullPointerException e) {
-			System.out.println("Invalid data entere please retry");
+			System.out.println(
+					"Invalid data entere please retry");
 			AddressBookMain.showMainMenu(sc);
 		}
-	
+
 	}
 
 	@Override
@@ -188,6 +190,7 @@ public class AddressBook implements IAddressBook {
 	}
 
 	public boolean isContactFound(String name) {
+		@SuppressWarnings("unused")
 		boolean isContactFound = contacts.stream().anyMatch(
 				c -> c.getFirstName().equals(name));
 		return true;
@@ -202,13 +205,12 @@ public class AddressBook implements IAddressBook {
 		return duplicate == 1;
 	}
 
-//	
 	@Override
 	public void searchContactByCityorState() {
 		System.out.println(
-				"************Search contacts by state or city **********");
+				"<==================Search contacts by state or city ==================>");
 		int flag = 0;
-		int countCountacts =0;
+		int countCountacts = 0;
 		sc = new Scanner(System.in);
 		System.out.println(
 				"Please enter the State or city to find the contacts");
@@ -234,7 +236,9 @@ public class AddressBook implements IAddressBook {
 				contacts.add(cityOrState);
 				countCountacts++;
 				System.out.println(cityOrState);
-				System.out.println("The number of contacts by city or state is "+countCountacts);
+				System.out.println(
+						"The number of contacts by city or state is "
+								+ countCountacts);
 			} else {
 				System.out.println(
 						" No records found with this city or state");
@@ -245,8 +249,6 @@ public class AddressBook implements IAddressBook {
 
 	@Override
 	public void viewContactByCtyorState() {
-		System.out.println(
-				"************View contacts by state or city **********");
 		if (contacts.isEmpty()) {
 			System.out.println("No records found");
 		} else {
@@ -266,7 +268,7 @@ public class AddressBook implements IAddressBook {
 					System.out.println(cityOrState);
 				} else {
 					System.out.println(
-							"No person found in " + name);
+							"No person found in the city " + name);
 				}
 			}
 		}
@@ -275,22 +277,51 @@ public class AddressBook implements IAddressBook {
 	@Override
 	public void searchContact() {
 		System.out.println(
-				"Please select from below options to get more search options \n1. Search contact by city or state\n2. view contact by city or state\n3. Exit search");
+				"Please select the type of search from below options \n1. Search contact by city or state\n2. view contact by city or state\n3. Exit search");
 		int option = sc.nextInt();
 		switch (option) {
 		case 1:
+			System.out.println(
+					"<=============Search Contact by City or State=============>");
 			searchContactByCityorState();
 			break;
 		case 2:
+			System.out.println(
+					"<=============View Contact by City or State=============>");
 			viewContactByCtyorState();
 			break;
 		case 3:
-			System.out.println("You have exited the contact search");			
+			System.out.println(
+					"You have exited the contact search");
 			break;
 		default:
 			System.out.println(
 					"You have entered an invalid key");
 		}
+	}
 
+	@Override
+	public void sortingMethod() {
+		System.out.println(
+				"Please select from below options to get more search options \n1. Search contact by city or state\n2. view contact by city or state\n3. Exit search");
+		int option = sc.nextInt();
+		switch (option) {
+		case 1:
+			System.out.println(
+					"<=============Sort By Name=============>");
+			sortByName(contacts);
+			break;
+		}
+
+	}
+
+	public static void sortByName(Set<Contacts> contacts) {
+		List<Contacts> sortedList = contacts.stream()
+				.sorted((p1, p2) -> p1.firstName
+						.compareTo(p2.firstName))
+				.collect(Collectors.toList());
+		for (Contacts sortList : sortedList) {
+			System.out.println(sortList);
+		}
 	}
 }

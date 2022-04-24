@@ -1,9 +1,7 @@
 package com.addressbook;
 
-import java.util.Set;
-
 public interface IAddressBook {
-
+	
 	void addContact();
 
 	void showContacts();
@@ -17,6 +15,8 @@ public interface IAddressBook {
 	void searchContactByCityorState();
 
 	void searchContact();
+
+	void sortingMethod();
 	
 
 	
