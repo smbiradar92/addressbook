@@ -101,12 +101,10 @@ public class Contacts {
 	@Override
 	public String toString() {
 		return "AddressBook [firstName=" + firstName
-				+ ", lastName=" + lastName + ", address="
-				+ address + ", city=" + city + ", state="
-				+ state + ", email=" + email + ", zip="
-				+ zip + ", phoneNumber=" + phoneNumber
-				+ "]";
+				+ ", lastName=" + lastName + ",  city="
+				+ city + ", state=" + state + ", email="
+				+ email + ", zip=" + zip + ", phoneNumber="
+				+ phoneNumber + "]";
 	}
-	
 
 }

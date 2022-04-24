@@ -1,6 +1,7 @@
 package com.addressbook;
 
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.Set;
 
@@ -13,6 +14,7 @@ public class AddressBook implements IAddressBook {
 	String state;
 	String email;
 	String name;
+	int i;
 	long zip;
 	long phoneNumber;
 
@@ -35,53 +37,57 @@ public class AddressBook implements IAddressBook {
 		System.out.println(
 				"Plese enter the number of contacts to add");
 		int N = sc.nextInt();
-		int i = 0;
-		for (i = 0; i < N; i++) {
-				if (i<=N) {
+		for (int i = 1; i <= N; i++) {
 				System.out.println(
-						"Please enter the details for contact"
-								+ i + 1 + "\n");
+						"Please enter the details for the contact"
+								+ i + "\n");
 				System.out.print("Enter the First name : ");
-				contact.setFirstName(sc.next());
-					if (checkDuplicate(firstName)) {
-						System.out.println(
-								"Name already exists");
-					}else {
-						i = 1;
+				firstName = sc.next();
+				if (checkDuplicate(firstName)) {
+					System.out.println(
+							"First Name already exists, please try with other name");
+				} else {
+					contact.setFirstName(firstName);
+					System.out.print(
+							"Enter the Last name : ");
+					contact.setLastName(sc.next());
+					System.out.print("Enter the city : ");
+					contact.setCity(sc.next());
+					System.out.print("Enter the State : ");
+					contact.setState(sc.next());
+					System.out
+							.print("Enter the email id : ");
+					contact.setEmail(sc.next());
+					System.out
+							.print("Enter the PinCode : ");
+					try {
+						contact.setZip(sc.nextLong());
+					} catch (Exception e) {
+						System.out.print(
+								"Please only enter Numerical digits");
+						System.out.print(
+								"Please enter the PinCode again : ");
+						contact.setZip(sc.nextLong());
 					}
-				System.out.print("Enter the Last name : ");
-				contact.setLastName(sc.next());
-				System.out.println("Enter the city : ");
-				contact.setCity(sc.next());
-				System.out.print("Enter the State name : ");
-				contact.setState(sc.next());
-				System.out.print("Enter the email id : ");
-				contact.setEmail(sc.next());
-				System.out.print("Enter the PinCode : ");
-				try {
-					contact.setZip(sc.nextLong());
-				} catch (Exception e) {
 					System.out.print(
-							"Please only enter Numerical digits");
-					System.out.print(
-							"Please enter the PinCode again : ");
-					contact.setZip(sc.nextLong());
+							"Enter the phoneNumber : ");
+					try {
+						contact.setPhoneNumber(
+								sc.nextLong());
+					} catch (Exception e) {
+						System.out.print(
+								"Please only enter Numerical digits");
+						System.out.print(
+								"Please enter the Phonenumber again : ");
+						contact.setPhoneNumber(
+								sc.nextLong());
+					}
+					contacts.add(contact);
+					System.out.println(
+							"Contact created successfully!!!!!\n");
 				}
-				System.out
-						.print("Enter the phoneNumber : ");
-				try {
-					contact.setPhoneNumber(sc.nextLong());
-				} catch (Exception e) {
-					System.out.print(
-							"Please only enter Numerical digits");
-					System.out.print(
-							"Please enter the Phonenumber again : ");
-					contact.setPhoneNumber(sc.nextLong());
-				}
-				contacts.add(contact);
-				System.out.println(
-						"Contact created successfully!!!!!\n");
-			}
+//			}
+
 		}
 	}
 
@@ -187,11 +193,54 @@ public class AddressBook implements IAddressBook {
 
 	}
 
-	public boolean checkDuplicate(String firstName) {
+	public boolean checkDuplicate(String f1irstName) {
 		int duplicate = contacts.stream()
 				.anyMatch(d -> d.getFirstName()
 						.equalsIgnoreCase(firstName)) ? 1
 								: 0;
 		return duplicate == 1;
+	}
+
+	@Override
+	public void searchContact(Set<Contacts> contacts) {
+		int flag = 0;
+		sc = new Scanner(System.in);
+		System.out.print(
+				"Please enter the State or city to find the contacts");
+		String search = sc.next();
+
+		boolean searchCity = contacts.stream()
+				.anyMatch(cityOrState -> cityOrState
+						.getCity().equalsIgnoreCase(search)
+						|| cityOrState.getState()
+								.equalsIgnoreCase(search));
+		if (searchCity) {
+			System.out.println("the contact " + search
+					+ " is found in the AddressBook");
+		}
+		for (Contacts cityOrState : contacts) {
+			if (cityOrState.getState()
+					.equalsIgnoreCase(search)
+					|| cityOrState.getCity()
+							.equals(search)) {
+				flag = 1;
+				contacts.add(cityOrState);
+			} else {
+				System.out.println(
+						" No records found with this city or state");
+			}
+		}
+
+	}
+//	public void searchByStateOrCity(String name,Map<String, Set<Contacts>> contacts) {
+//		sc = new Scanner(System.in);
+//		System.out.print("Please enter the State or city to find the contacts");
+//		name = sc.next();
+//		boolean search = contacts.
+
+	@Override
+	public void searchContact() {
+		// TODO Auto-generated method stub
+
 	}
 }
