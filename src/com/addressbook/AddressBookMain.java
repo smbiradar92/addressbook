@@ -88,7 +88,7 @@ public class AddressBookMain {
 
 	public static int showMainMenu(Scanner sc) {
 		System.out.println(
-				"How would you like to continue???? \n*******Please select from the below options ***********\n 1.Add new contact \t 2.AddressBooks \t 3.Edit current contact \t 4.Print contacts \t 5.Delete contact\t 6. Search conact \t 7.Exit");
+				"How would you like to continue???? \n*******Please select from the below options ***********\n 1.Add new contact \t 2.AddressBooks \t 3.Edit contact \t 4.Print contacts \t 5.Delete contact\t 6. Search contact \t 7.Exit");
 		int option = sc.nextInt();
 		return option;
 	}
