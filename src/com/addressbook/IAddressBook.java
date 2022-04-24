@@ -14,7 +14,5 @@ public interface IAddressBook {
 
 	void searchContact();
 
-	void searchContact(Set<Contacts> contacts);
-
 	
 }

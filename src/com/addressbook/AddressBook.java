@@ -172,7 +172,6 @@ public class AddressBook implements IAddressBook {
 			System.out.println(
 					"Your list is Empty....No contacts found");
 		} else {
-			// contacts.add(contact);
 			contacts.forEach(c -> {
 				System.out.print("firstName=" + c.firstName
 						+ ", lastName=" + c.lastName
@@ -201,13 +200,14 @@ public class AddressBook implements IAddressBook {
 		return duplicate == 1;
 	}
 
+//	
 	@Override
-	public void searchContact(Set<Contacts> contacts) {
+	public void searchContact() {
 		int flag = 0;
 		sc = new Scanner(System.in);
-		System.out.print(
+		System.out.println(
 				"Please enter the State or city to find the contacts");
-		String search = sc.next();
+		String search = sc.nextLine();
 
 		boolean searchCity = contacts.stream()
 				.anyMatch(cityOrState -> cityOrState
@@ -215,7 +215,7 @@ public class AddressBook implements IAddressBook {
 						|| cityOrState.getState()
 								.equalsIgnoreCase(search));
 		if (searchCity) {
-			System.out.println("the contact " + search
+			System.out.println("The contact " + search
 					+ " is found in the AddressBook");
 		}
 		for (Contacts cityOrState : contacts) {
@@ -238,9 +238,4 @@ public class AddressBook implements IAddressBook {
 //		name = sc.next();
 //		boolean search = contacts.
 
-	@Override
-	public void searchContact() {
-		// TODO Auto-generated method stub
-
-	}
 }
