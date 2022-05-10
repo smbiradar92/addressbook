@@ -84,7 +84,7 @@ public class AddressBookMain {
 				case 8:
 					option = 8;
 					System.out.println(
-							"**Thankyou for using Addressbook**\n **Have a nice day**");
+							"<=========Thankyou for using Addressbook=========>\n <=========Have a nice day===========>");
 					break;
 
 				default:
@@ -104,7 +104,7 @@ public class AddressBookMain {
 
 	public static int showMainMenu(Scanner sc) {
 		System.out.println(
-				"	How would you like to continue??? \n*******Please select from the below options ***********\n "
+				"\n		How would you like to continue??? \n <=========Please select from the below options ===========>\n "
 						+ "| 1.Add new contact \t 2.AddressBooks \t 3.Edit contact \t 4.Print contacts |\n | 5.Delete contact\t 6. Search contacts \t"
 						+ " 7. Sort contacts \t 8.Exit \t  |");
 		int option = sc.nextInt();

@@ -16,6 +16,7 @@ public class AddressBook implements IAddressBook {
 	String email;
 	String name;
 	int i;
+	int flag;
 	Long zip;
 	Long phoneNumber;
 
@@ -31,9 +32,7 @@ public class AddressBook implements IAddressBook {
 
 	@Override
 	public void addContact() {
-
-		System.out.println(
-				"---------------------1. Add New contact ------------------------\n");
+		
 		sc = new Scanner(System.in);
 		System.out.println(
 				"Plese enter the number of contacts to add");
@@ -58,31 +57,14 @@ public class AddressBook implements IAddressBook {
 				System.out.print("Enter the email id : ");
 				contact.setEmail(sc.next());
 				System.out.print("Enter the PinCode : ");
-				try {
 					contact.setZip(sc.nextLong());
-				} catch (Exception e) {
-					System.out.print(
-							"Please only enter Numerical digits");
-					System.out.print(
-							"Please enter the PinCode again : ");
-					contact.setZip(sc.nextLong());
-				}
 				System.out
 						.print("Enter the phoneNumber : ");
-				try {
-					contact.setPhoneNumber(sc.nextLong());
-				} catch (Exception e) {
-					System.out.print(
-							"Please only enter Numerical digits");
-					System.out.print(
-							"Please enter the Phonenumber again : ");
-					contact.setPhoneNumber(sc.nextLong());
-				}
+				contact.setPhoneNumber(sc.nextLong());
 				contacts.add(contact);
 				System.out.println(
 						"Contact created successfully!!!!!\n");
 			}
-//			}
 
 		}
 	}
@@ -90,10 +72,7 @@ public class AddressBook implements IAddressBook {
 	@Override
 	public void editContact() {
 
-		System.out.println(
-				"-----------------------2.Edit Contact--------------------------------------------\n");
-		System.out.println(contacts);
-
+		@SuppressWarnings("resource")
 		Scanner s = new Scanner(System.in);
 		System.out.println(
 				" \n Please enter the FirstName to edit");
@@ -129,8 +108,6 @@ public class AddressBook implements IAddressBook {
 
 	@Override
 	public void deleteContact() {
-		System.out.println(
-				"-----------------------4.Delete Contact--------------------------------------------\n");
 		showContacts();
 
 		Scanner sc = new Scanner(System.in);
@@ -146,15 +123,15 @@ public class AddressBook implements IAddressBook {
 						c -> c.getFirstName().equals(name))
 						.findFirst().get();
 				System.out.println(
-						"Are you sure you want to delete contact??\n please type y to confirm");
+						"Are you sure you want to delete contact??\n Please type 'y' to confirm");
 				String choice = sc.nextLine();
 				if (choice.equalsIgnoreCase("y")) {
 					contacts.remove(contact);
 					System.out.println(
 							"Contact Deleted Successfully");
 				} else {
-					System.out
-							.println("Contact not deleted");
+					System.out.println(
+							"Deletion Cancelled by User.......\n ===Contact not deleted===");
 				}
 			} else {
 				System.out.println(
@@ -172,20 +149,23 @@ public class AddressBook implements IAddressBook {
 	@Override
 	public void showContacts() {
 		System.out.println(
-				"------------Printing Contacts--------------");
+				"<==============Printing Contacts==============>");
 		if (contacts.isEmpty()) {
 			System.out.println(
 					"Your list is Empty....No contacts found");
 		} else {
-			contacts.forEach(c -> {
-				System.out.print("firstName=" + c.firstName
-						+ ", lastName=" + c.lastName
-						+ ", city=" + c.city + ", state="
-						+ c.state + ", email=" + c.email
-						+ ", zip=" + c.zip
-						+ ", phoneNumber=" + c.phoneNumber
-						+ "]\n");
-			});
+			for (Contacts list : contacts) {
+				System.out.println(list);
+			}
+//			contacts.forEach(c -> {
+//				System.out.print("firstName=" + c.firstName
+//						+ ", lastName=" + c.lastName
+//						+ ", city=" + c.city + ", state="
+//						+ c.state + ", email=" + c.email
+//						+ ", zip=" + c.zip
+//						+ ", phoneNumber=" + c.phoneNumber
+//						+ "]\n");
+//			});
 		}
 	}
 
@@ -207,8 +187,7 @@ public class AddressBook implements IAddressBook {
 
 	@Override
 	public void searchContactByCityorState() {
-		System.out.println(
-				"<==================Search contacts by state or city ==================>");
+		
 		@SuppressWarnings("unused")
 		int flag = 0;
 		int countCountacts = 0;

@@ -13,7 +13,7 @@ public class Contacts {
 
 	public Contacts(String firstName, String lastName,
 			String address, String city, String state,
-			Long zip,Long phoneNumber, String email) {
+			Long zip, Long phoneNumber, String email) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -89,7 +89,6 @@ public class Contacts {
 		this.phoneNumber = phoneNumber;
 	}
 
-	
 	@Override
 	public String toString() {
 		return "AddressBook [firstName=" + firstName
