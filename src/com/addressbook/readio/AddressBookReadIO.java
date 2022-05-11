@@ -48,6 +48,7 @@ public class AddressBookReadIO {
 
 		private IOStream(String fileName) {
 			this.fileName = fileName;
+			
 		}
 
 		public String getConstant() {
