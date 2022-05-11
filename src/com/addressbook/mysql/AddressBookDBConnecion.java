@@ -4,5 +4,4 @@ public class AddressBookDBConnecion {
 	
 	private static AddressBookDBService addressBookDBService;
 
-	
 }

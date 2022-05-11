@@ -66,7 +66,6 @@ public class AddressBookReadIO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
 	public void createFileandAddContacts() {
@@ -109,8 +108,6 @@ public class AddressBookReadIO {
 	}
 
 	private void addContact() {
-		System.out.println(
-				"<=============Add Employee=======>");
 		System.out.print("Enter the First name : ");
 		contact.setFirstName(sc.next());
 		System.out.print("Enter the Last name : ");
@@ -133,33 +130,42 @@ public class AddressBookReadIO {
 				"Contact created and added successfully!!!!!\n");
 	}
 
+	public static int showMenu() {
+
+		System.out.println(
+				"Please select an option from below\n 1.Add Contact\t 2 Show Contact\t 3.Exit");
+		sc = new Scanner(System.in);
+		int option = sc.nextInt();
+		return option;
+	}
+
 	public static void main(String[] args) {
 
 		System.out.println(
 				"<============= Welcome to AddressBook ================>");
 		AddressBookReadIO getValues = new AddressBookReadIO();
-		System.out.println(
-				"Please select an option from below\n 1.Add Contact\t 2 Show Contact\t 3.Exit");
-		sc = new Scanner(System.in);
-		int option = sc.nextInt();
-		switch (option) {
-		case 1:
-//			System.out.println(
-//					"<============= Add Contacts ================>");
-			getValues.createFileandAddContacts();
-			break;
-		case 2:
-			System.out.println(
-					"<=============  Print Contacts ================>");
-			getValues.readJsonFile();
-			break;
-		case 3:
-			System.out.println(
-					"<=============Exiting AddressBook ================>");
-			break;
-		default:
-			throw new IllegalArgumentException(
-					"Unexpected value: " + option);
+		int option = 0;
+		while (option != 3) {
+			option = showMenu();
+			switch (option) {
+			case 1:
+				System.out.println(
+						"<============= Add Contacts ================>");
+				getValues.createFileandAddContacts();
+				break;
+			case 2:
+				System.out.println(
+						"<=============  Print Contacts ================>");
+				getValues.readJsonFile();
+				break;
+			case 3:
+				System.out.println(
+						"<=============Exiting AddressBook ================>");
+				break;
+			default:
+				throw new IllegalArgumentException(
+						"Unexpected value: " + option);
+			}
 		}
 
 	}

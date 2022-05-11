@@ -1,1 +1,51 @@
-﻿
+﻿[
+  {
+    "firstName": "sdav",
+    "lastName": "svda",
+    "city": "dsv",
+    "state": "asdv",
+    "email": "dvs",
+    "zip": 15465,
+    "phoneNumber": 1651654
+  }
+][
+  {
+    "firstName": "sid",
+    "lastName": "biradar",
+    "city": "hyd",
+    "state": "ts",
+    "email": "smb@gmail.com",
+    "zip": 123456,
+    "phoneNumber": 91234567890
+  }
+][
+  {
+    "firstName": "Ashok",
+    "lastName": "khoda",
+    "city": "vizag",
+    "state": "AP",
+    "email": "ashok@bl.com",
+    "zip": 456132,
+    "phoneNumber": 91354987213
+  }
+][
+  {
+    "firstName": "sid",
+    "lastName": "biradar",
+    "city": "blk",
+    "state": "ka",
+    "email": "smb@bl.com",
+    "zip": 123456,
+    "phoneNumber": 12345798465
+  }
+][
+  {
+    "firstName": "sai",
+    "lastName": "siva",
+    "city": "bdr",
+    "state": "kar",
+    "email": "sai@bl.com",
+    "zip": 456132,
+    "phoneNumber": 12354564
+  }
+]
